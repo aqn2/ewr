@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapplication.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -15,6 +16,17 @@ class LoginActivity : AppCompatActivity() {
         val EXTRA_USERNAME = "username"
         val EXTRA_PASSWORD = "password"
     }
+
+    val startRegistrationForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+    { result: ActivityResult ->
+        if(result.resultCode == Activity.RESULT_OK){
+            val intent = result.data
+            binding.editTextLoginUsername.setText(intent?.getStringExtra(EXTRA_USERNAME))
+            binding.editTextLoginPassword.setText(intent?.getStringExtra(EXTRA_PASSWORD))
+        }
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,5 +48,6 @@ class LoginActivity : AppCompatActivity() {
 
             startActivity(registrationIntent)
         }
+
     }
 }
