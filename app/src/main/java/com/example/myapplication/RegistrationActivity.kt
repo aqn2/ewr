@@ -20,17 +20,32 @@ class RegistrationActivity : AppCompatActivity() {
         val password = intent.getStringExtra(LoginActivity.EXTRA_PASSWORD)
         Toast.makeText(this, "user:$username pwd $password", Toast.LENGTH_SHORT).show()
 
-        val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK){
-                val intent = result.data
-            }
 
-            startRegistrationForResult.launch(registrationIntent)
-        }
 
         binding.buttonRegisterConfirm.setOnClickListener{
             // TODO:verify that the information they entered is valiid
+
+            if(!RegistrationUtil.validateName(
+                    binding.editTextRegisterName.text.toString())){
+                Toast.makeText(this, "Invalid name", Toast.LENGTH_SHORT)
+            }
+
+            if(!RegistrationUtil.validateUsername(
+                    binding.editTextRegisterUsername.text.toString())){
+                Toast.makeText(this, "Invalid username", Toast.LENGTH_SHORT)
+            }
+
+            if(!RegistrationUtil.validatePassword(
+                    binding.editTextRegisterPassword.text.toString())){
+                Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT)
+            }
+
+            if(!RegistrationUtil.validateEmail(
+                    binding.editTextRegisterEmail.text.toString())){
+                Toast.makeText(this, "Invalid email", Toast.LENGTH_SHORT)
+            }
+
+
             var returnToLoginIntent = Intent().apply{
                 putExtra(LoginActivity.EXTRA_USERNAME,
                     binding.editTextRegisterUsername.text.toString())
@@ -38,7 +53,7 @@ class RegistrationActivity : AppCompatActivity() {
                     binding.editTextRegisterPassword.text.toString())
 
             }
-            setResult(Activity.RESULT_OK, returnToLoginIntent)
+            setResult(RESULT_OK, returnToLoginIntent)
             finish()
         }
     }
