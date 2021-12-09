@@ -47,7 +47,8 @@ class LoginActivity : AppCompatActivity() {
                 putExtra(EXTRA_PASSWORD, password)
             }
 
-            startActivity(registrationIntent)
+            //startActivity(registrationIntent)
+            startRegistrationForResult.launch(registrationIntent)
         }
 
     }

@@ -15,7 +15,7 @@ object RegistrationUtil {
         if(name.length < 8){
             return false
         }
-        for(i in 0..numberUsers){
+        for(i in 0..(numberUsers-1)){
             if(name == existingUsers[i]){
                 return false
             }
@@ -29,10 +29,14 @@ object RegistrationUtil {
     //a good matchint passowrd worksd
     //implement validate password function in the util class
     fun validatePassword(password : String, confirmPassword : String) : Boolean{
+        if(password != confirmPassword){
+            return false
+        }
+
         if(password.length < 8){
             return false
         }
-        var numbers = listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+        val numbers = listOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
         var numInPass = 0
         for(i in 0..9){
             if(password.contains(numbers[i])) {
@@ -43,7 +47,7 @@ object RegistrationUtil {
             return false
         }
 
-        var specialChar = listOf("!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "{", "}", "[", "]", "\\", "|")
+        val specialChar = listOf("!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "{", "}", "[", "]", "\\", "|")
         var charInPass = 0
         for(i in 0..19){
             if(password.contains(specialChar[i])) {
@@ -54,7 +58,7 @@ object RegistrationUtil {
             return false
         }
 
-        var capitals = listOf("A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
+        val capitals = listOf("A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
         var capsInPass = 0
         for(i in 0..25){
             if(password.contains(capitals[i])) {
@@ -65,9 +69,6 @@ object RegistrationUtil {
             return false
         }
 
-        if(password != confirmPassword){
-            return false
-        }
 
         return true
     }
@@ -75,10 +76,10 @@ object RegistrationUtil {
 
     //email not used, proper format (user.@gomanin.tld)
     fun validateEmail(email : String) : Boolean {
-        if(email != ""){
+        if(email == ""){
             return false
         }
-        for(i in 0..numberEmail){
+        for(i in 0..(numberEmail-1)){
             if(email == existingEmail[i]){
                 return false
             }
@@ -86,7 +87,7 @@ object RegistrationUtil {
 
         var atnum = -1
         var dotnum = -1
-        for(i in 0..email.length){
+        for(i in 0..(email.length-1)){
             if(email.contains("@")){
                 atnum = i
             }

@@ -27,11 +27,13 @@ class RegistrationUtilTest{
     @Test
     fun validatePassword_noCapitalLetters_returnsFalse(){
         val result = RegistrationUtil.validatePassword("1abcdefg", "1abcdefg")
+        assertThat(result).isFalse()
     }
 
     @Test
     fun validatePassword_noSpecialChar_returnsFalse(){
         val result = RegistrationUtil.validatePassword("Abcdefgh", "Abcdefgh")
+        assertThat(result).isFalse()
     }
 
 

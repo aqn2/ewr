@@ -23,7 +23,6 @@ class RegistrationActivity : AppCompatActivity() {
 
 
         binding.buttonRegisterConfirm.setOnClickListener{
-            // TODO:verify that the information they entered is valiid
 
             if(!RegistrationUtil.validateName(
                     binding.editTextRegisterName.text.toString())){
@@ -36,7 +35,7 @@ class RegistrationActivity : AppCompatActivity() {
             }
 
             if(!RegistrationUtil.validatePassword(
-                    binding.editTextRegisterPassword.text.toString())){
+                    binding.editTextRegisterPassword.text.toString(), binding.editTextRegisterConfPassword.text.toString())){
                 Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT)
             }
 
